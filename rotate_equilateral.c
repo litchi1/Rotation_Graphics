@@ -6,36 +6,39 @@
 
 void triangle(int, int, int, int, int, int);
 void rotation(int, int, int, int, int, int, float);
-void dda(int, int, int, int);
+void dda1(int, int, int, int);
+void dda2(int, int, int, int);
+void dda3(int, int, int, int);
 
 int main()
 {
     int gd = DETECT, gm;
-    initgraph(&gd, &gm, NULL);
+    int x1, y1, x2, y2, x3, y3;
+    initgraph(&gd, &gm, "");
 
-    printf("The coordinates of the equilateral triangle are (250, 114), (200, 200) and (300, 200)\n");
+    printf("The coordinates of the equilateral triangle are (250, 114), (200, 200) and (300, 200) and its centroid is (250, 172)\n");
 
     triangle(250, 114, 200, 200, 300, 200);
     delay(1000);
 
     printf("The angle of rotation is 60 degrees\n");
 
-    rotation(250, 114, 200, 200, 300, 200, 60);
+    rotation(250, 114, 200, 200, 300, 200, -60); //negative angle because the origin starts from top in the graphics window frame
     delay(5000);
 }
 
 /*Function to draw the triangle using dda algorithm*/
 void triangle(int x1, int y1, int x2, int y2, int x3, int y3)
 {
-   dda(x1, y1, x2, y2);
-   dda(x2, y2, x3, y3);
-   dda(x3, y3, x1, y1);
+   dda1(x1, y1, x2, y2);
+   dda2(x2, y2, x3, y3);
+   dda3(x3, y3, x1, y1);
 }
 
 /*Function to rotate the triangle to specified angle*/
 void rotation(int x1, int y1, int x2, int y2, int x3, int y3, float theta)
 {
-    int l1, m1, l2, m2, l3, m3, xf = x1, yf = y1;
+    int l1, m1, l2, m2, l3, m3, xf = 250, yf = 172;
 
     /*cleardevice() to be used if original triangle not to be displayed. Remove the comments below to use this function*/
 
@@ -53,8 +56,31 @@ void rotation(int x1, int y1, int x2, int y2, int x3, int y3, float theta)
     triangle(l1, m1, l2, m2, l3, m3);
 }
 
-/*DDA algorithm to draw the sides of the triangle*/
-void dda(int xa, int ya, int xb, int yb)
+/*DDA algorithm to draw the first side of the triangle with blue color*/
+void dda1(int xa, int ya, int xb, int yb)
+{
+    int dx, dy, steps, i;
+    float xNext, yNext, x = xa, y = ya;
+
+    dx = xb - xa;
+    dy = yb - ya;
+    if(abs(dx) > abs(dy))
+        steps = abs(dx);
+    else
+        steps = abs(dy);
+    xNext = dx / float(steps);
+    yNext = dy / float(steps);
+    putpixel(ROUND(x),ROUND(y), BLUE);
+    for(i = 1; i <= steps; i++)
+    {
+        x = x + xNext;
+        y = y + yNext;
+        putpixel(ROUND(x), ROUND(y), BLUE);
+    }
+}
+
+/*DDA algorithm to draw the second side of the triangle with red color*/
+void dda2(int xa, int ya, int xb, int yb)
 {
     int dx, dy, steps, i;
     float xNext, yNext, x = xa, y = ya;
@@ -66,11 +92,33 @@ void dda(int xa, int ya, int xb, int yb)
         steps = abs(dy);
     xNext = dx / float(steps);
     yNext = dy / float(steps);
-    putpixel(ROUND(x),ROUND(y), YELLOW);
+    putpixel(ROUND(x),ROUND(y), RED);
     for(i = 1; i <= steps; i++)
     {
         x = x + xNext;
         y = y + yNext;
-        putpixel(ROUND(x), ROUND(y), YELLOW);
+        putpixel(ROUND(x), ROUND(y), RED);
+    }
+}
+
+/*DDA algorithm to draw the third side of the triangle with green color*/
+void dda3(int xa, int ya, int xb, int yb)
+{
+    int dx, dy, steps, i;
+    float xNext, yNext, x = xa, y = ya;
+    dx = xb - xa;
+    dy = yb - ya;
+    if(abs(dx) > abs(dy))
+        steps = abs(dx);
+    else
+        steps = abs(dy);
+    xNext = dx / float(steps);
+    yNext = dy / float(steps);
+    putpixel(ROUND(x),ROUND(y), GREEN);
+    for(i = 1; i <= steps; i++)
+    {
+        x = x + xNext;
+        y = y + yNext;
+        putpixel(ROUND(x), ROUND(y), GREEN);
     }
 }
