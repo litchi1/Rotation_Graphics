@@ -1,5 +1,7 @@
 # Rotation_Graphics
 
-This is a program implemented in C to rotate an equilateral triangle about centroid 60 degrees anticlockwise direction.
+This program is implemented in C language to rotate an equilateral triangle about its centroid 60 degrees anticlockwise.
 
-The coordinates are chosen such that it forms an equilateral triangle.
+The three coordinates of the sides of the triangle are chosen so that it forms an equilateral triangle and its centroid is calculated. 
+
+
