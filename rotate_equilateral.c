@@ -21,7 +21,7 @@ int main()
     triangle(250, 114, 200, 200, 300, 200);
     delay(1000);
 
-    printf("The angle of rotation is 60 degrees\n");
+    printf("The angle of rotation is 45 degrees\n");
 
     rotation(250, 114, 200, 200, 300, 200, -45); //negative angle because the origin starts from top in the graphics window frame
     delay(5000);
