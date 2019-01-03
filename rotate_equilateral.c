@@ -23,7 +23,7 @@ int main()
 
     printf("The angle of rotation is 60 degrees\n");
 
-    rotation(250, 114, 200, 200, 300, 200, -60); //negative angle because the origin starts from top in the graphics window frame
+    rotation(250, 114, 200, 200, 300, 200, -45); //negative angle because the origin starts from top in the graphics window frame
     delay(5000);
 }
 
